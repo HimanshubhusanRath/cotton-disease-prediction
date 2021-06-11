@@ -22,6 +22,9 @@ from tensorflow.keras.applications.inception_v3 import preprocess_input
 # In[2]:
 
 
+if not os.path.exists('uploads'):
+    os.makedirs('uploads')
+
 # Load the model
 #model = load_model('resnet152V2_cotton_disease_model.h5',compile=False)
 
