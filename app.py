@@ -82,6 +82,9 @@ def predict():
     file_path = os.path.join(CURR_DIR,'uploads',secure_filename(file.filename))
     file.save(file_path)
     
+    # Replace this with actual model
+    model=None
+    
     # Predict
     prediction = predict_disease(file_path, model)
     
