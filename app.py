@@ -23,7 +23,7 @@ from tensorflow.keras.applications.inception_v3 import preprocess_input
 
 
 # Load the model
-model = load_model('model/resnet152V2_cotton_disease_model.h5',compile=False)
+model = load_model('resnet152V2_cotton_disease_model.h5',compile=False)
 
 
 # In[3]:
