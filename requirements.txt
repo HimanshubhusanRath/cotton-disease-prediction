@@ -42,3 +42,4 @@ tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.0
 tensorflow-cpu==2.5.0
 tensorflow-estimator==2.5.0
+pillow==8.2.0
