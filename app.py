@@ -26,7 +26,7 @@ if not os.path.exists('uploads'):
     os.makedirs('uploads')
 
 # Load the model
-#model = load_model('resnet152V2_cotton_disease_model.h5',compile=False)
+model = load_model('resnet152V2_cotton_disease_model.h5',compile=False)
 
 
 # In[3]:
@@ -39,8 +39,8 @@ def predict_disease(file_path, model):
     X = np.expand_dims(X, axis=0)
     X = preprocess_input(X)
     
-#    pred = model.predict(X)
-#    pred = np.argmax(pred, axis=1)
+    pred = model.predict(X)
+    pred = np.argmax(pred, axis=1)
     pred=2
     print(pred)
     
@@ -81,9 +81,6 @@ def predict():
     CURR_DIR = os.path.abspath('')
     file_path = os.path.join(CURR_DIR,'uploads',secure_filename(file.filename))
     file.save(file_path)
-    
-    # Replace this with actual model
-    model=None
     
     # Predict
     prediction = predict_disease(file_path, model)
