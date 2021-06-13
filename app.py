@@ -26,7 +26,8 @@ if not os.path.exists('uploads'):
     os.makedirs('uploads')
 
 # Load the model
-model = load_model('resnet152V2_cotton_disease_model.h5',compile=False)
+model_path=os.path.join(os.path.abspath('') , 'resnet152V2_cotton_disease_model.h5')
+model = load_model(model_path,compile=False)
 
 
 # In[3]:
