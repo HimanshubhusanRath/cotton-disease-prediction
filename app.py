@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[9]:
+# In[1]:
 
 
 from flask import Flask, render_template, request
@@ -13,60 +13,41 @@ import numpy as np
 import calendar
 import os
 from werkzeug.utils import secure_filename
-
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.inception_v3 import preprocess_input
+from fastai.vision.all import *
 
 
-# In[10]:
+# In[2]:
 
 
 if not os.path.exists('uploads'):
     os.makedirs('uploads')
 
 
-# In[11]:
+# In[3]:
 
 
 # Load the model
-model = load_model('model/cotton_disease_customer-model.h5',compile=False)
+model = load_learner('model/cotton_disease_densenet-model.h5')
 
 
-# In[12]:
+# In[4]:
 
 
-def predict_disease(file_path, model):
-    img = image.load_img(file_path, target_size=(224,224,3))
-    X = image.img_to_array(img)
-    X = X/255
-    X = np.expand_dims(X, axis=0)
-    X = preprocess_input(X)
-    
-    pred = model.predict(X)
-    pred = np.argmax(pred, axis=1)
-    print(pred)
-    
-    if pred==0:
-        pred="The leaf is diseased cotton leaf"
-    elif pred==1:
-        pred="The leaf is diseased cotton plant"
-    elif pred==2:
-        pred="The leaf is fresh cotton leaf"
-    else:
-        pred="The leaf is fresh cotton plant"
+def predict_disease(image_path, model):
+    img = plt.imread(image_path)
+    classofimg, idx, probability = model.predict(img)
         
-    return pred
+    return classofimg
 
 
-# In[13]:
+# In[5]:
 
 
 # Define the main app
 app = Flask(__name__,template_folder='views')
 
 
-# In[14]:
+# In[6]:
 
 
 # Define the end points
@@ -97,6 +78,12 @@ def predict():
 # Start the App in DEBUG mode.
 if __name__=="__main__":
     app.run(debug=True, use_reloader=False)
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
